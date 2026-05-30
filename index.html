@@ -3,57 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اختبار تجريبي</title>
+<title>تقويم درس الأعداد الثنائية</title>
+
+<style>
+body{
+font-family:Tahoma,Arial,sans-serif;
+background:#f4f8ff;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#0066cc;
+}
+
+.question{
+margin-bottom:20px;
+padding:15px;
+background:#f9f9f9;
+border-radius:10px;
+}
+
+label{
+display:block;
+margin:8px 0;
+cursor:pointer;
+}
+
+button{
+background:#0066cc;
+color:white;
+border:none;
+padding:12px 25px;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+display:block;
+margin:auto;
+}
+
+button:hover{
+background:#004f9f;
+}
+
+#result{
+text-align:center;
+font-size:22px;
+font-weight:bold;
+margin-top:20px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>اختبار تجريبي</h1>
+<div class="container">
 
-<p>السؤال 1: 2 + 2 = ؟</p>
+<h1>تقويم درس الأعداد الثنائية</h1>
 
-<label>
-<input type="radio" name="q1" value="0">
-3
-</label>
+<div class="question">
+<label>الاسم</label>
+<input type="text" id="studentName" style="width:100%;padding:10px;">
+</div>
 
-<br>
+<form id="quiz">
 
-<label>
-<input type="radio" name="q1" value="1">
-4
-</label>
+<div class="question">
+<p>1- اللغة التي يفهمها جهاز الكمبيوتر هي ..........؟</p>
+<label><input type="radio" name="q1" value="0"> اللغة الانجليزية</label>
+<label><input type="radio" name="q1" value="0"> اللغة العربية</label>
+<label><input type="radio" name="q1" value="1"> لغة الآلة (0،1)</label>
+</div>
 
-<br><br>
+<div class="question">
+<p>2- ما هو النظام الذي تُكتب فيه الأعداد الثنائية؟</p>
+<label><input type="radio" name="q2" value="0"> العشري</label>
+<label><input type="radio" name="q2" value="1"> الثنائي</label>
+<label><input type="radio" name="q2" value="0"> السادس عشر</label>
+</div>
 
-<button onclick="calculateScore()">
-إظهار النتيجة
-</button>
+<div class="question">
+<p>3- تمثل الأرقام 0 و1 جميع القيم الممكنة داخل النظام الثنائي؟</p>
+<label><input type="radio" name="q3" value="1"> نعم</label>
+<label><input type="radio" name="q3" value="0"> لا</label>
+</div>
+
+<div class="question">
+<p>4- كم عدد الأرقام المستخدمة في النظام الثنائي؟</p>
+<label><input type="radio" name="q4" value="0"> 10</label>
+<label><input type="radio" name="q4" value="1"> 2</label>
+<label><input type="radio" name="q4" value="0"> 8</label>
+</div>
+
+<div class="question">
+<p>5- يتكون نظام العد العشري من الأرقام التالية؟</p>
+<label><input type="radio" name="q5" value="1"> 0 - 9</label>
+<label><input type="radio" name="q5" value="0"> 1 - 10</label>
+<label><input type="radio" name="q5" value="0"> 0 - 10</label>
+</div>
+
+<div class="question">
+<p>6- ما الرقم العشري المكافئ للعدد الثنائي 101 ؟</p>
+<label><input type="radio" name="q6" value="0"> 4</label>
+<label><input type="radio" name="q6" value="1"> 5</label>
+<label><input type="radio" name="q6" value="0"> 6</label>
+</div>
+
+<div class="question">
+<p>7- يتكون نظام العد الثنائي من؟</p>
+<label><input type="radio" name="q7" value="0"> 1 - 2</label>
+<label><input type="radio" name="q7" value="1"> 0 - 1</label>
+<label><input type="radio" name="q7" value="0"> 2 - 2</label>
+</div>
+
+<div class="question">
+<p>8- أي من الأعداد التالية مكتوب بالنظام الثنائي؟</p>
+<label><input type="radio" name="q8" value="1"> 11001</label>
+<label><input type="radio" name="q8" value="0"> 2468</label>
+<label><input type="radio" name="q8" value="0"> 1357</label>
+</div>
+
+<div class="question">
+<p>9- العدد الثنائي 11 يقابل في النظام العشري؟</p>
+<label><input type="radio" name="q9" value="0"> 1</label>
+<label><input type="radio" name="q9" value="1"> 2</label>
+<label><input type="radio" name="q9" value="0"> 3</label>
+</div>
+
+<button type="button" onclick="checkQuiz()">إرسال الإجابات</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
 
 <script>
-function calculateScore() {
+
+function checkQuiz(){
 
 let score = 0;
+let totalQuestions = 9;
 
-let answer = document.querySelector('input[name="q1"]:checked');
+for(let i=1;i<=9;i++){
+
+let answer = document.querySelector('input[name="q'+i+'"]:checked');
 
 if(answer){
 score += Number(answer.value);
 }
 
-let percentage = score * 100;
+}
 
-if (percentage >= 75) {
+let percentage = (score / totalQuestions) * 100;
 
-window.location.href = "https://www.google.com";
+document.getElementById("result").innerHTML =
+"درجتك: " + percentage.toFixed(0) + "%";
 
-} else {
+setTimeout(function(){
 
-window.location.href = "https://www.bing.com";
+if(percentage >= 75){
+
+window.location.href =
+"https://drive.google.com/drive/folders/1rirq74LCfH-KSjSZkGH1Ri14FZ6YqKJG?usp=drive_link";
+
+}else{
+
+window.location.href =
+"https://drive.google.com/drive/folders/1ZxjwU7Ol6SbxhQUGZxsk8witeWQt8wGC?usp=drive_link";
 
 }
 
+},2000);
+
 }
+
 </script>
 
 </body>

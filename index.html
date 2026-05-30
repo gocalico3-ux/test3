@@ -1,0 +1,30 @@
+<script>
+function calculateScore() {
+
+    let score = 0;
+
+    for(let i = 1; i <= 7; i++) {
+        let answer = document.querySelector('input[name="q'+i+'"]:checked');
+
+        if(answer) {
+            score += Number(answer.value);
+        }
+    }
+
+    let percentage = (score / 7) * 100;
+
+    if (percentage >= 75) {
+
+        alert("مبروك! حصلت على " + percentage.toFixed(1) + "%");
+        
+        window.location.href = "https://drive.google.com/drive/folders/1rirq74LCfH-KSjSZkGH1Ri14FZ6YqKJG?usp=drive_link";
+
+    } else {
+
+        alert("حصلت على " + percentage.toFixed(1) + "%، يرجى إعادة الدرس");
+        
+        window.location.href = "https://drive.google.com/drive/folders/1ZxjwU7Ol6SbxhQUGZxsk8witeWQt8wGC?usp=drive_link";
+
+    }
+}
+</script>
